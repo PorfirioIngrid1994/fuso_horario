@@ -1,0 +1,19 @@
+import datetime
+import pytz
+
+fuso_origem = pytz.timezone('America/Sao_Paulo')
+fuso_destino = pytz.timezone('Asia/Jerusalem')
+
+print('-=-=-=-=-=-=-=-=-=-=-=-=-=-')
+print('Fuso horário de Israel')
+print('-=-=-=-=-=-=-=-=-=-=-=-=-=-\n')
+
+while True:
+    try:
+        data_hora = datetime.datetime.strptime(input('Digite a data e hora (formato: dd/mm/aaaa hh:mm:ss): '), '%d/%m/%Y %H:%M:%S')
+        data_hora = fuso_origem.localize(data_hora)
+        data_hora = data_hora.astimezone(fuso_destino)
+        print(f'Olá, bem-vindo(a)! \nA data e hora no fuso horário de {fuso_destino.zone}: {data_hora}')
+        break
+    except ValueError:
+        print('Data ou hora inválidas. Tente novamente...')
